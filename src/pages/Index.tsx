@@ -1,4 +1,3 @@
-
 import React from "react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
@@ -47,8 +46,13 @@ const Index = () => {
                   </Button>
                 </Link>
                 <Link to="/signup">
-                  <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10">
-                    Join Us Now
+                  <Button 
+                    size="lg" 
+                    className="bg-transparent border-2 border-white hover:bg-white group"
+                  >
+                    <span className="text-white font-semibold group-hover:text-workhive-blue">
+                      Join Us Now
+                    </span>
                   </Button>
                 </Link>
               </div>
@@ -60,7 +64,7 @@ const Index = () => {
               className="hidden md:block"
             >
               <img
-                src="/placeholder.svg"
+                src="/"
                 alt="Students working on laptops"
                 className="w-full h-auto rounded-lg shadow-lg"
               />
