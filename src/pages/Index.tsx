@@ -1,183 +1,183 @@
 
-import React, { useEffect, useRef } from 'react';
-import { motion, useAnimation, useInView } from 'framer-motion';
-import { Check, Star, Heart, ChevronRight } from 'lucide-react';
-import { Link } from 'react-router-dom';
-
-const FeatureCard = ({ 
-  icon, 
-  title, 
-  description 
-}: { 
-  icon: React.ReactNode; 
-  title: string; 
-  description: string; 
-}) => {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.3 });
-  const controls = useAnimation();
-
-  useEffect(() => {
-    if (isInView) {
-      controls.start("visible");
-    }
-  }, [isInView, controls]);
-
-  return (
-    <motion.div
-      ref={ref}
-      initial="hidden"
-      animate={controls}
-      variants={{
-        hidden: { opacity: 0, y: 20 },
-        visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
-      }}
-      className="flex flex-col items-center text-center p-6"
-    >
-      <div className="mb-4 text-center">
-        {icon}
-      </div>
-      <h3 className="text-xl font-semibold mb-2">{title}</h3>
-      <p className="text-gray-600">{description}</p>
-    </motion.div>
-  );
-};
+import React from "react";
+import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const Index = () => {
-  const heroRef = useRef(null);
-  const isHeroInView = useInView(heroRef, { once: true });
-  const heroControls = useAnimation();
-
-  useEffect(() => {
-    if (isHeroInView) {
-      heroControls.start("visible");
-    }
-  }, [isHeroInView, heroControls]);
-
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen flex flex-col">
+      {/* Header/Navigation */}
+      <header className="bg-white shadow-sm">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+          <Link to="/" className="text-2xl font-bold text-workhive-blue">WorkHive</Link>
+          <div className="flex space-x-4">
+            <Link to="/internships">
+              <Button variant="ghost">Internships</Button>
+            </Link>
+            <Link to="/login">
+              <Button variant="ghost">Sign In</Button>
+            </Link>
+            <Link to="/signup">
+              <Button>Sign Up</Button>
+            </Link>
+          </div>
+        </div>
+      </header>
+
       {/* Hero Section */}
-      <section 
-        ref={heroRef} 
-        className="hero-section py-16 md:py-24 overflow-hidden relative"
-      >
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-900 via-blue-700 to-blue-500 animate-wave"></div>
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB4PSIwIiB5PSIwIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiIHBhdHRlcm5UcmFuc2Zvcm09InJvdGF0ZSgzMCkiPjxyZWN0IHg9IjAiIHk9IjAiIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgZmlsbD0icmdiYSgyNTUsMjU1LDI1NSwwLjAzKSI+PC9yZWN0PjwvcGF0dGVybj48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNwYXR0ZXJuKSI+PC9yZWN0Pjwvc3ZnPg==')]"></div>
-        
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="flex flex-col lg:flex-row items-center justify-between">
-            <motion.div 
-              className="lg:w-1/2 text-center lg:text-left mb-12 lg:mb-0"
-              initial="hidden"
-              animate={heroControls}
-              variants={{
-                hidden: { opacity: 0, y: 20 },
-                visible: { 
-                  opacity: 1, 
-                  y: 0, 
-                  transition: { 
-                    duration: 0.5,
-                    staggerChildren: 0.1
-                  } 
-                }
-              }}
+      <section className="flex-grow flex items-center bg-gradient-to-r from-workhive-blue to-workhive-darkBlue text-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+            <motion.div
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
             >
-              <motion.h1 
-                className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight"
-                variants={{
-                  hidden: { opacity: 0, y: 20 },
-                  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
-                }}
-              >
-                Empower Your Career
-              </motion.h1>
-              
-              <motion.p 
-                className="text-xl text-blue-100 mb-8"
-                variants={{
-                  hidden: { opacity: 0, y: 20 },
-                  visible: { opacity: 1, y: 0, transition: { duration: 0.5, delay: 0.1 } }
-                }}
-              >
-                Discover a world of opportunities with meaningful internships
-              </motion.p>
-              
-              <motion.div 
-                className="flex flex-col sm:flex-row justify-center lg:justify-start space-y-4 sm:space-y-0 sm:space-x-4"
-                variants={{
-                  hidden: { opacity: 0, y: 20 },
-                  visible: { opacity: 1, y: 0, transition: { duration: 0.5, delay: 0.2 } }
-                }}
-              >
-                <Link 
-                  to="/internships" 
-                  className="btn-primary py-3 px-8 text-lg shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300"
-                >
-                  Join us now
+              <h1 className="text-4xl md:text-5xl font-bold mb-6">
+                Kickstart Your Career with the Perfect Internship
+              </h1>
+              <p className="text-xl mb-8">
+                Connect with top companies offering internships in your field. Build your skills, network with professionals, and take the first step toward your dream career.
+              </p>
+              <div className="flex flex-wrap gap-4">
+                <Link to="/internships">
+                  <Button size="lg" className="bg-white text-workhive-blue hover:bg-workhive-lightGray">
+                    Browse Internships
+                  </Button>
                 </Link>
-                <Link 
-                  to="/contact" 
-                  className="bg-white text-workhive-blue font-medium py-3 px-8 rounded-md text-lg hover:bg-blue-50 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
-                >
-                  Request demo
+                <Link to="/signup">
+                  <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10">
+                    Join Us Now
+                  </Button>
                 </Link>
-              </motion.div>
+              </div>
             </motion.div>
-            
-            <motion.div 
-              className="lg:w-1/2"
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.5, delay: 0.3 }}
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8 }}
+              className="hidden md:block"
             >
-              <img 
-                src="public/lovable-uploads/f40994f2-ec42-4297-91a5-4d1bb6009195.png" 
-                alt="Professional team collaboration" 
-                className="w-full h-auto rounded-lg shadow-2xl"
+              <img
+                src="/placeholder.svg"
+                alt="Students working on laptops"
+                className="w-full h-auto rounded-lg shadow-lg"
               />
             </motion.div>
           </div>
         </div>
       </section>
-      
+
       {/* Features Section */}
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-4">
+      <section className="bg-white py-16">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-3xl font-bold mb-4">Why Choose WorkHive?</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              We connect talented students with companies offering meaningful internship experiences.
+            </p>
+          </motion.div>
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <FeatureCard 
-              icon={<Star className="h-12 w-12 text-pink-500" />}
-              title="Wide Range of Opportunities"
-              description="Discover internships and projects across various domains and industries tailored to your career goals."
-            />
-            
-            <FeatureCard 
-              icon={<Check className="h-12 w-12 text-red-500" />}
-              title="User Friendly Application Process"
-              description="Experience a seamless and intuitive application process that simplifies your journey towards securing opportunities."
-            />
-            
-            <FeatureCard 
-              icon={<Heart className="h-12 w-12 text-rose-500" />}
-              title="Personalized Recommendations"
-              description="Receive tailored suggestions based on your profile and preferences to maximize your chances of success."
-            />
+            {[
+              {
+                title: "Quality Opportunities",
+                description: "Access verified internships from top companies across various industries.",
+                icon: "🌟",
+              },
+              {
+                title: "Skill Development",
+                description: "Find internships that match your career goals and help you develop relevant skills.",
+                icon: "📈",
+              },
+              {
+                title: "Networking",
+                description: "Connect with professionals and build relationships that last beyond your internship.",
+                icon: "🔗",
+              },
+            ].map((feature, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                className="bg-gray-50 p-6 rounded-lg shadow-sm hover:shadow-md transition-shadow"
+              >
+                <div className="text-4xl mb-4">{feature.icon}</div>
+                <h3 className="text-xl font-semibold mb-2">{feature.title}</h3>
+                <p className="text-gray-600">{feature.description}</p>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
-      
-      {/* Call to Action */}
-      <section className="py-16 bg-gray-50 border-t border-gray-100">
-        <div className="container mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold mb-8">Ready to kickstart your career? Browse specific internship opportunities designed for you.</h2>
-          <Link 
-            to="/internships" 
-            className="inline-flex items-center bg-workhive-blue text-white font-medium py-3 px-8 rounded-md hover:bg-blue-600 transition-all duration-300 shadow-md hover:shadow-lg transform hover:-translate-y-1"
+
+      {/* CTA Section */}
+      <section className="bg-workhive-navy py-16 text-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
           >
-            Find My Internship
-            <ChevronRight className="ml-2 h-5 w-5" />
-          </Link>
+            <h2 className="text-3xl font-bold mb-4">Ready to Find Your Perfect Internship?</h2>
+            <p className="text-xl mb-8 max-w-3xl mx-auto">
+              Join thousands of students who have launched their careers through WorkHive.
+            </p>
+            <Link to="/signup">
+              <Button size="lg" className="bg-workhive-blue hover:bg-workhive-darkBlue">
+                Get Started Today
+              </Button>
+            </Link>
+          </motion.div>
         </div>
       </section>
+
+      {/* Footer */}
+      <footer className="bg-gray-800 text-gray-300 py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <div>
+              <h3 className="text-xl font-bold mb-4">WorkHive</h3>
+              <p className="mb-4">Connecting students with meaningful internship opportunities.</p>
+            </div>
+            <div>
+              <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
+              <ul className="space-y-2">
+                <li><Link to="/" className="hover:text-white">Home</Link></li>
+                <li><Link to="/internships" className="hover:text-white">Internships</Link></li>
+                <li><Link to="/login" className="hover:text-white">Sign In</Link></li>
+                <li><Link to="/signup" className="hover:text-white">Sign Up</Link></li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="text-lg font-semibold mb-4">Resources</h4>
+              <ul className="space-y-2">
+                <li><a href="#" className="hover:text-white">Blog</a></li>
+                <li><a href="#" className="hover:text-white">Resume Tips</a></li>
+                <li><a href="#" className="hover:text-white">Interview Prep</a></li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="text-lg font-semibold mb-4">Contact</h4>
+              <ul className="space-y-2">
+                <li>Email: info@workhive.com</li>
+                <li>Phone: (123) 456-7890</li>
+                <li>Address: 123 Intern St, San Francisco, CA</li>
+              </ul>
+            </div>
+          </div>
+          <div className="mt-8 pt-8 border-t border-gray-700 text-center">
+            <p>&copy; {new Date().getFullYear()} WorkHive. All rights reserved.</p>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 };
