@@ -64,7 +64,7 @@ const Index = () => {
               className="hidden md:block"
             >
               <img
-                src="/"
+                src="/images/hero-image.jpg"
                 alt="Students working on laptops"
                 className="w-full h-auto rounded-lg shadow-lg"
               />

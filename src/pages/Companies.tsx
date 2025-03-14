@@ -49,7 +49,7 @@ const companyCategories = [
         name: 'BIMA Ghana',
         location: 'Accra, Ghana',
         positions: ['Medical Officer', 'Health Advisor', 'Medical Research'],
-        logo: 'public/lovable-uploads/1707a0b4-15f8-4d6c-926d-17e61ffa937d.png'
+        logo: 'bima.png'
       },
       {
         id: 6,
