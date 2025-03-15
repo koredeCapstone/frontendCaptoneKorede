@@ -1,9 +1,9 @@
-
 import React from "react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
 
 // Mock data for internship listings
 const internshipListings = [
@@ -48,65 +48,135 @@ const internshipListings = [
 const InternshipListings = () => {
   return (
     <div className="min-h-screen bg-gray-50">
-      <header className="bg-white shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-          <Link to="/" className="text-2xl font-bold text-workhive-blue">WorkHive</Link>
-          <div className="flex space-x-4">
-            <Link to="/internships">
-              <Button variant="ghost">Internships</Button>
-            </Link>
-            <Link to="/login">
-              <Button variant="ghost">Sign In</Button>
-            </Link>
-            <Link to="/signup">
-              <Button>Sign Up</Button>
-            </Link>
-          </div>
-        </div>
-      </header>
-
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
+      <div className="container mx-auto px-4 py-8">
+        <motion.h1
+          initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
+          className="text-3xl font-bold mb-8 text-center text-gray-800"
         >
-          <h1 className="text-3xl font-bold mb-8 text-center">Available Internships</h1>
+          Available Internship Positions
+        </motion.h1>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {internshipListings.map((listing) => (
+            <motion.div
+              key={listing.id}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+            >
+              <Card>
+                <CardHeader>
+                  <CardTitle>{listing.title}</CardTitle>
+                  <CardDescription>{listing.company} • {listing.location}</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-gray-600 mb-4">{listing.description}</p>
+                  <div className="text-sm text-gray-500">
+                    <p className="font-semibold mb-2">Requirements:</p>
+                    <p>{listing.requirements}</p>
+                  </div>
+                </CardContent>
+                <CardFooter className="flex justify-between items-center">
+                  <div className="text-sm text-gray-500">
+                    Deadline: {new Date(listing.applicationDeadline).toLocaleDateString()}
+                  </div>
+                  <Link to="/application">
+                    <Button>Apply Now</Button>
+                  </Link>
+                </CardFooter>
+              </Card>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* Newsletter and Footer Section with Wave Background */}
+        <div className="relative mt-16">
+          <div 
+            className="absolute inset-0 bg-cover bg-center"
+            style={{
+              backgroundImage: "url('/images/wave-bg.png')",
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              backgroundColor: '#000B45',
+              opacity: 0.95
+            }}
+          />
           
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {internshipListings.map((internship) => (
-              <motion.div
-                key={internship.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: internship.id * 0.1 }}
-              >
-                <Card>
-                  <CardHeader>
-                    <CardTitle>{internship.title}</CardTitle>
-                    <CardDescription>{internship.company} • {internship.location}</CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="mb-4">{internship.description}</p>
-                    <div className="text-sm text-gray-600">
-                      <p className="font-semibold">Requirements:</p>
-                      <p>{internship.requirements}</p>
-                    </div>
-                  </CardContent>
-                  <CardFooter className="flex justify-between items-center">
-                    <div className="text-sm text-gray-500">
-                      Deadline: {new Date(internship.applicationDeadline).toLocaleDateString()}
-                    </div>
-                    <Link to="/login">
-                      <Button>Apply Now</Button>
-                    </Link>
-                  </CardFooter>
-                </Card>
-              </motion.div>
-            ))}
+          <div className="relative z-10">
+            {/* Newsletter Content */}
+            <div className="py-16 px-4">
+              <div className="max-w-4xl mx-auto text-center">
+                <h2 className="text-2xl font-bold mb-8 text-white">Subscribe to our newsletter</h2>
+                <div className="flex max-w-md mx-auto gap-2">
+                  <Input 
+                    type="email" 
+                    placeholder="Enter your email" 
+                    className="bg-white text-black"
+                  />
+                  <Button className="bg-blue-500 hover:bg-blue-700 text-white">
+                    Subscribe
+                  </Button>
+                </div>
+              </div>
+            </div>
+
+            {/* Footer Links */}
+            <div className="px-4 py-12">
+              <div className="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
+                <div>
+                  <h3 className="font-bold mb-4 text-white">Product</h3>
+                  <ul className="space-y-2">
+                    <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Overview</a></li>
+                    <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Features</a></li>
+                    <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Solutions</a></li>
+                  </ul>
+                </div>
+                <div>
+                  <h3 className="font-bold mb-4 text-white">Resources</h3>
+                  <ul className="space-y-2">
+                    <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Blog</a></li>
+                    <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Guides</a></li>
+                    <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Help Center</a></li>
+                  </ul>
+                </div>
+                <div>
+                  <h3 className="font-bold mb-4 text-white">Company</h3>
+                  <ul className="space-y-2">
+                    <li><a href="#" className="text-gray-300 hover:text-white transition-colors">About</a></li>
+                    <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Careers</a></li>
+                    <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Contact</a></li>
+                  </ul>
+                </div>
+                <div>
+                  <h3 className="font-bold mb-4 text-white">Plans & Pricing</h3>
+                  <ul className="space-y-2">
+                    <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Personal</a></li>
+                    <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Business</a></li>
+                    <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Enterprise</a></li>
+                  </ul>
+                </div>
+              </div>
+
+              {/* Footer Bottom */}
+              <div className="mt-16 text-center">
+                <div className="mb-4">
+                  <select className="bg-opacity-20 bg-white text-white rounded px-3 py-1 border border-gray-500">
+                    <option className="text-black">English</option>
+                  </select>
+                </div>
+                <div className="space-x-4 text-gray-300">
+                  <span>© 2024 Brand, Inc.</span>
+                  <a href="#" className="hover:text-white transition-colors">Privacy</a>
+                  <a href="#" className="hover:text-white transition-colors">Terms</a>
+                  <a href="#" className="hover:text-white transition-colors">Sitemap</a>
+                </div>
+              </div>
+            </div>
           </div>
-        </motion.div>
-      </main>
+        </div>
+      </div>
     </div>
   );
 };

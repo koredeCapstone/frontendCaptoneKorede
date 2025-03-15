@@ -2,28 +2,11 @@ import React from "react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { Input } from "@/components/ui/input";
 
 const Index = () => {
   return (
     <div className="min-h-screen flex flex-col">
-      {/* Header/Navigation */}
-      <header className="bg-white shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-          <Link to="/" className="text-2xl font-bold text-workhive-blue">WorkHive</Link>
-          <div className="flex space-x-4">
-            <Link to="/internships">
-              <Button variant="ghost">Internships</Button>
-            </Link>
-            <Link to="/login">
-              <Button variant="ghost">Sign In</Button>
-            </Link>
-            <Link to="/signup">
-              <Button>Sign Up</Button>
-            </Link>
-          </div>
-        </div>
-      </header>
-
       {/* Hero Section */}
       <section className="flex-grow flex items-center bg-gradient-to-r from-workhive-blue to-workhive-darkBlue text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
@@ -64,7 +47,7 @@ const Index = () => {
               className="hidden md:block"
             >
               <img
-                src="/images/hero-image.jpg"
+                src="/images/aa.png"
                 alt="Students working on laptops"
                 className="w-full h-auto rounded-lg shadow-lg"
               />
@@ -143,45 +126,91 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="bg-gray-800 text-gray-300 py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-            <div>
-              <h3 className="text-xl font-bold mb-4">WorkHive</h3>
-              <p className="mb-4">Connecting students with meaningful internship opportunities.</p>
-            </div>
-            <div>
-              <h4 className="text-lg font-semibold mb-4">Quick Links</h4>
-              <ul className="space-y-2">
-                <li><Link to="/" className="hover:text-white">Home</Link></li>
-                <li><Link to="/internships" className="hover:text-white">Internships</Link></li>
-                <li><Link to="/login" className="hover:text-white">Sign In</Link></li>
-                <li><Link to="/signup" className="hover:text-white">Sign Up</Link></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="text-lg font-semibold mb-4">Resources</h4>
-              <ul className="space-y-2">
-                <li><a href="#" className="hover:text-white">Blog</a></li>
-                <li><a href="#" className="hover:text-white">Resume Tips</a></li>
-                <li><a href="#" className="hover:text-white">Interview Prep</a></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="text-lg font-semibold mb-4">Contact</h4>
-              <ul className="space-y-2">
-                <li>Email: info@workhive.com</li>
-                <li>Phone: (123) 456-7890</li>
-                <li>Address: 123 Intern St, San Francisco, CA</li>
-              </ul>
+      {/* Newsletter and Footer Section with Wave Background */}
+      <section className="relative">
+        <div 
+          className="absolute inset-0 bg-cover bg-center"
+          style={{
+            backgroundImage: "url('/images/wave-bg.png')",
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            backgroundColor: '#000B45',
+            opacity: 0.95
+          }}
+        />
+        
+        <div className="relative z-10">
+          {/* Newsletter Content */}
+          <div className="py-16 px-4">
+            <div className="max-w-4xl mx-auto text-center">
+              <h2 className="text-2xl font-bold mb-8 text-white">Subscribe to our newsletter</h2>
+              <div className="flex max-w-md mx-auto gap-2">
+                <Input 
+                  type="email" 
+                  placeholder="Enter your email" 
+                  className="bg-white text-black"
+                />
+                <Button className="bg-blue-500 hover:bg-blue-700 text-white">
+                  Subscribe
+                </Button>
+              </div>
             </div>
           </div>
-          <div className="mt-8 pt-8 border-t border-gray-700 text-center">
-            <p>&copy; {new Date().getFullYear()} WorkHive. All rights reserved.</p>
+
+          {/* Footer Links */}
+          <div className="px-4 py-12">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
+              <div>
+                <h3 className="font-bold mb-4 text-white">Product</h3>
+                <ul className="space-y-2">
+                  <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Overview</a></li>
+                  <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Features</a></li>
+                  <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Solutions</a></li>
+                </ul>
+              </div>
+              <div>
+                <h3 className="font-bold mb-4 text-white">Resources</h3>
+                <ul className="space-y-2">
+                  <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Blog</a></li>
+                  <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Guides</a></li>
+                  <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Help Center</a></li>
+                </ul>
+              </div>
+              <div>
+                <h3 className="font-bold mb-4 text-white">Company</h3>
+                <ul className="space-y-2">
+                  <li><a href="#" className="text-gray-300 hover:text-white transition-colors">About</a></li>
+                  <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Careers</a></li>
+                  <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Contact</a></li>
+                </ul>
+              </div>
+              <div>
+                <h3 className="font-bold mb-4 text-white">Plans & Pricing</h3>
+                <ul className="space-y-2">
+                  <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Personal</a></li>
+                  <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Business</a></li>
+                  <li><a href="#" className="text-gray-300 hover:text-white transition-colors">Enterprise</a></li>
+                </ul>
+              </div>
+            </div>
+
+            {/* Footer Bottom */}
+            <div className="mt-16 text-center">
+              <div className="mb-4">
+                <select className="bg-opacity-20 bg-white text-white rounded px-3 py-1 border border-gray-500">
+                  <option className="text-black">English</option>
+                </select>
+              </div>
+              <div className="space-x-4 text-gray-300">
+                <span>© 2024 Brand, Inc.</span>
+                <a href="#" className="hover:text-white transition-colors">Privacy</a>
+                <a href="#" className="hover:text-white transition-colors">Terms</a>
+                <a href="#" className="hover:text-white transition-colors">Sitemap</a>
+              </div>
+            </div>
           </div>
         </div>
-      </footer>
+      </section>
     </div>
   );
 };

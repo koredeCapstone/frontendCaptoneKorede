@@ -1,10 +1,11 @@
-
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Upload, Check } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
 
-const ApplicationForm = () => {
+const Application = () => {
   const { toast } = useToast();
   const [formState, setFormState] = useState({
     firstName: '',
@@ -123,50 +124,49 @@ const ApplicationForm = () => {
               transition={{ duration: 0.5, delay: 0.2 }}
               className="text-xl font-semibold mb-4 border-b pb-2"
             >
-              Name
+              Personal Information
             </motion.h2>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div>
                 <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-1">
-                  First Name
+                  First Name *
                 </label>
-                <input
+                <Input
                   type="text"
                   id="firstName"
                   name="firstName"
-                  className="form-input"
                   placeholder="First Name"
                   value={formState.firstName}
                   onChange={handleChange}
+                  required
                 />
               </div>
               
               <div>
                 <label htmlFor="surname" className="block text-sm font-medium text-gray-700 mb-1">
-                  Surname
+                  Surname *
                 </label>
-                <input
+                <Input
                   type="text"
                   id="surname"
                   name="surname"
-                  className="form-input"
                   placeholder="Surname"
                   value={formState.surname}
                   onChange={handleChange}
+                  required
                 />
               </div>
               
               <div>
                 <label htmlFor="otherName" className="block text-sm font-medium text-gray-700 mb-1">
-                  Other name
+                  Other Name
                 </label>
-                <input
+                <Input
                   type="text"
                   id="otherName"
                   name="otherName"
-                  className="form-input"
-                  placeholder="Other name"
+                  placeholder="Other Name (Optional)"
                   value={formState.otherName}
                   onChange={handleChange}
                 />
@@ -175,54 +175,6 @@ const ApplicationForm = () => {
           </div>
           
           {/* Contact Information */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            <div>
-              <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-                Email
-              </label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                className="form-input"
-                placeholder="Email"
-                value={formState.email}
-                onChange={handleChange}
-              />
-            </div>
-            
-            <div>
-              <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
-                Phone Number
-              </label>
-              <input
-                type="tel"
-                id="phone"
-                name="phone"
-                className="form-input"
-                placeholder="Phone Number"
-                value={formState.phone}
-                onChange={handleChange}
-              />
-            </div>
-            
-            <div>
-              <label htmlFor="degree" className="block text-sm font-medium text-gray-700 mb-1">
-                Degree
-              </label>
-              <input
-                type="text"
-                id="degree"
-                name="degree"
-                className="form-input"
-                placeholder="Degree"
-                value={formState.degree}
-                onChange={handleChange}
-              />
-            </div>
-          </div>
-          
-          {/* Residence */}
           <div>
             <motion.h2 
               initial={{ opacity: 0, x: -20 }}
@@ -230,155 +182,168 @@ const ApplicationForm = () => {
               transition={{ duration: 0.5, delay: 0.3 }}
               className="text-xl font-semibold mb-4 border-b pb-2"
             >
-              Residence
+              Contact Information
             </motion.h2>
             
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div>
-                <label htmlFor="country" className="block text-sm font-medium text-gray-700 mb-1">
-                  Country
+                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                  Email *
                 </label>
-                <input
-                  type="text"
-                  id="country"
-                  name="country"
-                  className="form-input"
-                  placeholder="Country"
-                  value={formState.country}
+                <Input
+                  type="email"
+                  id="email"
+                  name="email"
+                  placeholder="Email Address"
+                  value={formState.email}
                   onChange={handleChange}
+                  required
                 />
               </div>
               
               <div>
-                <label htmlFor="region" className="block text-sm font-medium text-gray-700 mb-1">
-                  Region/state
+                <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">
+                  Phone Number *
                 </label>
-                <input
-                  type="text"
-                  id="region"
-                  name="region"
-                  className="form-input"
-                  placeholder="Region/state"
-                  value={formState.region}
+                <Input
+                  type="tel"
+                  id="phone"
+                  name="phone"
+                  placeholder="Phone Number"
+                  value={formState.phone}
                   onChange={handleChange}
+                  required
                 />
               </div>
               
               <div>
-                <label htmlFor="city" className="block text-sm font-medium text-gray-700 mb-1">
-                  City/Town
+                <label htmlFor="degree" className="block text-sm font-medium text-gray-700 mb-1">
+                  Degree *
                 </label>
-                <input
+                <Input
                   type="text"
-                  id="city"
-                  name="city"
-                  className="form-input"
-                  placeholder="City/Town"
-                  value={formState.city}
+                  id="degree"
+                  name="degree"
+                  placeholder="Degree"
+                  value={formState.degree}
                   onChange={handleChange}
+                  required
                 />
               </div>
             </div>
           </div>
           
-          {/* Attachments */}
-          <div className="space-y-6">
-            <div>
-              <p className="text-sm font-medium text-gray-700 mb-2">
-                Attach a resume in Word or PDF format(max file size 30MB)
-              </p>
-              <div className="flex items-center">
-                <label htmlFor="resume" className={`flex items-center gap-2 px-4 py-2 bg-${resumeUploaded ? 'green-500' : 'workhive-blue'} text-white rounded-md cursor-pointer hover:bg-${resumeUploaded ? 'green-600' : 'blue-600'} transition-all duration-200`}>
-                  {resumeUploaded ? (
-                    <>
-                      <Check className="h-5 w-5" />
-                      <span>Resume Uploaded</span>
-                    </>
-                  ) : (
-                    <>
-                      <Upload className="h-5 w-5" />
-                      <span>Upload Resume</span>
-                    </>
-                  )}
-                </label>
-                <input
-                  type="file"
-                  id="resume"
-                  name="resume"
-                  accept=".doc,.docx,.pdf"
-                  className="hidden"
-                  onChange={(e) => handleFileChange(e, 'resume')}
-                />
-              </div>
-            </div>
-            
-            <div>
-              <p className="text-sm font-medium text-gray-700 mb-2">
-                Attach a transcript (max file size 30MB)
-              </p>
-              <div className="flex items-center">
-                <label htmlFor="transcript" className={`flex items-center gap-2 px-4 py-2 bg-${transcriptUploaded ? 'green-500' : 'workhive-blue'} text-white rounded-md cursor-pointer hover:bg-${transcriptUploaded ? 'green-600' : 'blue-600'} transition-all duration-200`}>
-                  {transcriptUploaded ? (
-                    <>
-                      <Check className="h-5 w-5" />
-                      <span>Transcript Uploaded</span>
-                    </>
-                  ) : (
-                    <>
-                      <Upload className="h-5 w-5" />
-                      <span>Upload Transcript</span>
-                    </>
-                  )}
-                </label>
-                <input
-                  type="file"
-                  id="transcript"
-                  name="transcript"
-                  accept=".doc,.docx,.pdf,.jpg,.jpeg,.png"
-                  className="hidden"
-                  onChange={(e) => handleFileChange(e, 'transcript')}
-                />
-              </div>
-            </div>
-            
-            <div>
-              <p className="text-sm font-medium text-gray-700 mb-2">
-                Attach an internship letter (max file size 30MB)
-              </p>
-              <div className="flex items-center">
-                <label htmlFor="internshipLetter" className={`flex items-center gap-2 px-4 py-2 bg-${letterUploaded ? 'green-500' : 'workhive-blue'} text-white rounded-md cursor-pointer hover:bg-${letterUploaded ? 'green-600' : 'blue-600'} transition-all duration-200`}>
-                  {letterUploaded ? (
-                    <>
-                      <Check className="h-5 w-5" />
-                      <span>Letter Uploaded</span>
-                    </>
-                  ) : (
-                    <>
-                      <Upload className="h-5 w-5" />
-                      <span>Upload Internship Letter</span>
-                    </>
-                  )}
-                </label>
-                <input
-                  type="file"
-                  id="internshipLetter"
-                  name="internshipLetter"
-                  accept=".doc,.docx,.pdf"
-                  className="hidden"
-                  onChange={(e) => handleFileChange(e, 'internshipLetter')}
-                />
-              </div>
-            </div>
-          </div>
-          
-          {/* Submit Button */}
-          <div className="pt-6">
-            <button 
-              type="submit"
-              className="w-full bg-workhive-blue text-white py-3 px-6 rounded-md font-medium hover:bg-blue-600 transition-all duration-300 transform hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 shadow-md hover:shadow-lg"
+          {/* File Uploads */}
+          <div>
+            <motion.h2 
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+              className="text-xl font-semibold mb-4 border-b pb-2"
             >
+              Documents
+            </motion.h2>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              {/* Resume Upload */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Resume/CV *
+                </label>
+                <div className="relative">
+                  <input
+                    type="file"
+                    id="resume"
+                    name="resume"
+                    accept=".pdf,.doc,.docx"
+                    onChange={(e) => handleFileChange(e, 'resume')}
+                    className="hidden"
+                  />
+                  <label
+                    htmlFor="resume"
+                    className={`flex items-center justify-center w-full p-4 border-2 border-dashed rounded-lg cursor-pointer transition-colors
+                      ${resumeUploaded ? 'border-green-500 bg-green-50' : 'border-gray-300 hover:border-gray-400'}`}
+                  >
+                    {resumeUploaded ? (
+                      <Check className="w-6 h-6 text-green-500" />
+                    ) : (
+                      <Upload className="w-6 h-6 text-gray-400" />
+                    )}
+                    <span className="ml-2 text-sm text-gray-600">
+                      {resumeUploaded ? 'Resume Uploaded' : 'Upload Resume'}
+                    </span>
+                  </label>
+                </div>
+              </div>
+
+              {/* Transcript Upload */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Academic Transcript
+                </label>
+                <div className="relative">
+                  <input
+                    type="file"
+                    id="transcript"
+                    name="transcript"
+                    accept=".pdf,.doc,.docx"
+                    onChange={(e) => handleFileChange(e, 'transcript')}
+                    className="hidden"
+                  />
+                  <label
+                    htmlFor="transcript"
+                    className={`flex items-center justify-center w-full p-4 border-2 border-dashed rounded-lg cursor-pointer transition-colors
+                      ${transcriptUploaded ? 'border-green-500 bg-green-50' : 'border-gray-300 hover:border-gray-400'}`}
+                  >
+                    {transcriptUploaded ? (
+                      <Check className="w-6 h-6 text-green-500" />
+                    ) : (
+                      <Upload className="w-6 h-6 text-gray-400" />
+                    )}
+                    <span className="ml-2 text-sm text-gray-600">
+                      {transcriptUploaded ? 'Transcript Uploaded' : 'Upload Transcript'}
+                    </span>
+                  </label>
+                </div>
+              </div>
+
+              {/* Internship Letter Upload */}
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  Internship Letter
+                </label>
+                <div className="relative">
+                  <input
+                    type="file"
+                    id="internshipLetter"
+                    name="internshipLetter"
+                    accept=".pdf,.doc,.docx"
+                    onChange={(e) => handleFileChange(e, 'internshipLetter')}
+                    className="hidden"
+                  />
+                  <label
+                    htmlFor="internshipLetter"
+                    className={`flex items-center justify-center w-full p-4 border-2 border-dashed rounded-lg cursor-pointer transition-colors
+                      ${letterUploaded ? 'border-green-500 bg-green-50' : 'border-gray-300 hover:border-gray-400'}`}
+                  >
+                    {letterUploaded ? (
+                      <Check className="w-6 h-6 text-green-500" />
+                    ) : (
+                      <Upload className="w-6 h-6 text-gray-400" />
+                    )}
+                    <span className="ml-2 text-sm text-gray-600">
+                      {letterUploaded ? 'Letter Uploaded' : 'Upload Letter'}
+                    </span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="flex justify-end mt-8">
+            <Button type="submit" className="px-8">
               Submit Application
-            </button>
+            </Button>
           </div>
         </form>
       </div>
@@ -386,4 +351,4 @@ const ApplicationForm = () => {
   );
 };
 
-export default ApplicationForm;
+export default Application;

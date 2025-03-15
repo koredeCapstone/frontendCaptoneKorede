@@ -112,7 +112,7 @@ const SignUp = () => {
   return (
     <div
       style={{
-        backgroundImage: "url('/images/background.png')",
+        backgroundImage: "url('/images/ap.png')",
         backgroundSize: "cover",
         backgroundPosition: "center",
         minHeight: "100vh",

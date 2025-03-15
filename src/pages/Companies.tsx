@@ -1,7 +1,29 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, useAnimation, useInView } from 'framer-motion';
 import { Search } from 'lucide-react';
+
+interface Position {
+  id: number;
+  name: string;
+  location: string;
+  positions: string[];
+  logo: string;
+}
+
+interface Company {
+  id: number;
+  name: string;
+  location: string;
+  positions: string[];
+  logo: string;
+}
+
+interface Category {
+  id: string;
+  name: string;
+  description: string;
+  companies: Company[];
+}
 
 const companyCategories = [
   {
@@ -14,28 +36,28 @@ const companyCategories = [
         name: 'Ghana Web Design Ltd',
         location: 'Accra, Ghana',
         positions: ['Frontend Developer', 'Graphic & Web Designer', 'UI/UX Designer'],
-        logo: 'public/lovable-uploads/242ee177-d54e-4746-952d-1276af2e6793.png'
+        logo: '/images/ghana web.png'
       },
       {
         id: 2,
         name: 'Hyperlink InfoSystem',
         location: 'Kumasi, Ghana',
         positions: ['Backend Developer', 'DevOps Engineer', 'QA Engineer'],
-        logo: 'public/lovable-uploads/60243461-7892-49c1-9653-985a6bab0c11.png'
+        logo: '/images/hyperlink.png'
       },
       {
         id: 3,
         name: 'Eragatek',
         location: 'Accra, Ghana',
         positions: ['Software Engineer', 'Mobile Developer', 'System Administrator'],
-        logo: 'public/lovable-uploads/37f2e25f-64f5-4220-84d1-e221c2732c25.png'
+        logo: '/images/garris.png'
       },
       {
         id: 4,
         name: 'Friinixel',
         location: 'Tema, Ghana',
         positions: ['Frontend Developer', 'UI/UX Designer', 'Product Manager'],
-        logo: 'public/lovable-uploads/c70abc2b-8621-4b67-a2b5-78765f73e318.png'
+        logo: '/images/finixel.png'
       }
     ]
   },
@@ -49,28 +71,28 @@ const companyCategories = [
         name: 'BIMA Ghana',
         location: 'Accra, Ghana',
         positions: ['Medical Officer', 'Health Advisor', 'Medical Research'],
-        logo: 'bima.png'
+        logo: '/images/bima.png'
       },
       {
         id: 6,
         name: 'Komfo Anokye Teaching Hospital',
         location: 'Kumasi, Ghana',
         positions: ['Healthcare Assistant', 'Medical Research', 'Medical Advisor'],
-        logo: 'public/lovable-uploads/bdc031ad-9542-45b3-b175-4fa8f80a47e5.png'
+        logo: '/images/kkomfo anokye.png'
       },
       {
         id: 7,
         name: 'Geno Lab',
         location: 'Accra, Ghana',
         positions: ['Lab Technician', 'Research Assistant', 'Medical Data Analyst'],
-        logo: 'public/lovable-uploads/e9c1987b-7d6d-4b15-80a7-66165cbf2ce6.png'
+        logo: '/images/genelab.png'
       },
       {
         id: 8,
         name: 'Korle Bu Teaching Hospital',
         location: 'Accra, Ghana',
         positions: ['Healthcare Assistant', 'Medical Research', 'Medical Advisor'],
-        logo: 'public/lovable-uploads/f36fc91b-16b9-4cdb-aae5-fa4d947ef43b.png'
+        logo: '/images/korle bu.png'
       }
     ]
   },
@@ -84,34 +106,34 @@ const companyCategories = [
         name: 'United Bank for Africa',
         location: 'Accra, Ghana',
         positions: ['Accounting and Auditing', 'Banking Operations', 'Financial Analysis'],
-        logo: 'public/lovable-uploads/d16ade33-6220-4c7a-98b1-cb25428ba07f.png'
+        logo: '/images/uba.png'
       },
       {
         id: 10,
         name: 'Access Bank',
         location: 'Kumasi, Ghana',
         positions: ['Wealth Management', 'Customer Service', 'Financial Analyst'],
-        logo: 'public/lovable-uploads/bdc031ad-9542-45b3-b175-4fa8f80a47e5.png'
+        logo: '/images/access.png'
       },
       {
         id: 11,
         name: 'Bank Of Ghana',
         location: 'Accra, Ghana',
         positions: ['Financial Regulation', 'Treasury', 'Policy Analysis'],
-        logo: 'public/lovable-uploads/e9c1987b-7d6d-4b15-80a7-66165cbf2ce6.png'
+        logo: '/images/bank of ghana.png'
       },
       {
         id: 12,
         name: 'Dalex Finance',
         location: 'Accra, Ghana',
         positions: ['Investment Banking', 'Credit Analysis', 'Financial Research'],
-        logo: 'public/lovable-uploads/242ee177-d54e-4746-952d-1276af2e6793.png'
+        logo: '/images/dalex.png'
       }
     ]
   }
 ];
 
-const CompanyCard = ({ company }: { company: any }) => {
+const CompanyCard = ({ company }: { company: Company }) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.3 });
   const controls = useAnimation();
@@ -165,7 +187,7 @@ const CompanyCard = ({ company }: { company: any }) => {
   );
 };
 
-const CategorySection = ({ category }: { category: any }) => {
+const CategorySection = ({ category }: { category: Category }) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, amount: 0.1 });
   const controls = useAnimation();
@@ -204,7 +226,7 @@ const CategorySection = ({ category }: { category: any }) => {
       </motion.div>
       
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-        {category.companies.map((company: any) => (
+        {category.companies.map((company: Company) => (
           <CompanyCard key={company.id} company={company} />
         ))}
       </div>
