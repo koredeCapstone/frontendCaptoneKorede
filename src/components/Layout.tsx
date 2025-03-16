@@ -13,20 +13,41 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
               WorkHive
             </Link>
             <nav className="hidden md:flex items-center space-x-6">
-              <Link to="/internships" className="text-gray-700 hover:text-workhive-blue">
+              <Link
+                to="/"
+                className="text-gray-700 hover:text-blue-600 transition-colors"
+              >
+                Home
+              </Link>
+              <Link
+                to="/internships"
+                className="text-gray-700 hover:text-blue-600 transition-colors"
+              >
                 Internships
               </Link>
-              <Link to="/companies" className="text-gray-700 hover:text-workhive-blue">
+              <Link
+                to="/companies"
+                className="text-gray-700 hover:text-blue-600 transition-colors"
+              >
                 Companies
               </Link>
-              <Link to="/reviews" className="text-gray-700 hover:text-workhive-blue">
-                Reviews
+              <Link
+                to="/testimonials"
+                className="text-gray-700 hover:text-blue-600 transition-colors"
+              >
+                Testimonials
               </Link>
-              <Link to="/application" className="text-gray-700 hover:text-workhive-blue">
+              <Link
+                to="/apply"
+                className="text-gray-700 hover:text-blue-600 transition-colors"
+              >
                 Apply Now
               </Link>
-              <Link to="/testimonials" className="text-gray-700 hover:text-workhive-blue">
-                Testimonials
+              <Link
+                to="/post-internship"
+                className="text-gray-700 hover:text-blue-600 transition-colors"
+              >
+                Post Internship
               </Link>
             </nav>
             <div className="flex items-center space-x-4">

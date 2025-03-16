@@ -22,10 +22,10 @@ const Index = () => {
               <p className="text-xl mb-8">
                 Connect with top companies offering internships in your field. Build your skills, network with professionals, and take the first step toward your dream career.
               </p>
-              <div className="flex flex-wrap gap-4">
-                <Link to="/internships">
+              <div className="flex flex-col sm:flex-row gap-4 mt-8">
+                <Link to="/demo">
                   <Button size="lg" className="bg-white text-workhive-blue hover:bg-workhive-lightGray">
-                    Browse Internships
+                    Request Demo
                   </Button>
                 </Link>
                 <Link to="/signup">
@@ -102,6 +102,18 @@ const Index = () => {
               </motion.div>
             ))}
           </div>
+          <div className="flex justify-center items-center gap-4 mt-16">
+            <Link to="/resume">
+              <Button size="lg" className="bg-workhive-blue text-white hover:bg-workhive-darkBlue">
+                CV & Resume Guide
+              </Button>
+            </Link>
+            <Link to="/internships">
+              <Button size="lg" className="bg-workhive-blue text-white hover:bg-workhive-darkBlue">
+                Browse Internships
+              </Button>
+            </Link>
+          </div>
         </div>
       </section>
 
@@ -117,11 +129,18 @@ const Index = () => {
             <p className="text-xl mb-8 max-w-3xl mx-auto">
               Join thousands of students who have launched their careers through WorkHive.
             </p>
-            <Link to="/signup">
-              <Button size="lg" className="bg-workhive-blue hover:bg-workhive-darkBlue">
-                Get Started Today
-              </Button>
-            </Link>
+            <div className="flex justify-center gap-4 mt-16">
+              <Link to="/resume">
+                <Button size="lg" className="bg-workhive-blue text-white hover:bg-workhive-darkBlue">
+                  CV & Resume Guide
+                </Button>
+              </Link>
+              <Link to="/internships">
+                <Button size="lg" className="bg-workhive-blue text-white hover:bg-workhive-darkBlue">
+                  Browse Internships
+                </Button>
+              </Link>
+            </div>
           </motion.div>
         </div>
       </section>
