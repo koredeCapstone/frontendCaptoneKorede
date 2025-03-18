@@ -23,9 +23,9 @@ const Index = () => {
                 Connect with top companies offering internships in your field. Build your skills, network with professionals, and take the first step toward your dream career.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 mt-8">
-                <Link to="/demo">
+                <Link to="/internships">
                   <Button size="lg" className="bg-white text-workhive-blue hover:bg-workhive-lightGray">
-                    Request Demo
+                    Browse Internships
                   </Button>
                 </Link>
                 <Link to="/signup">
@@ -47,7 +47,7 @@ const Index = () => {
               className="hidden md:block"
             >
               <img
-                src="/images/aa.png"
+                src="images/aa.png"
                 alt="Students working on laptops"
                 className="w-full h-auto rounded-lg shadow-lg"
               />
@@ -102,18 +102,18 @@ const Index = () => {
               </motion.div>
             ))}
           </div>
-          <div className="flex justify-center items-center gap-4 mt-16">
-            <Link to="/resume">
-              <Button size="lg" className="bg-workhive-blue text-white hover:bg-workhive-darkBlue">
-                CV & Resume Guide
-              </Button>
-            </Link>
-            <Link to="/internships">
-              <Button size="lg" className="bg-workhive-blue text-white hover:bg-workhive-darkBlue">
-                Browse Internships
-              </Button>
-            </Link>
-          </div>
+          <div className="flex justify-center gap-4 mt-16">
+              <Link to="/resume">
+                <Button size="lg" className="bg-workhive-blue text-white hover:bg-workhive-darkBlue">
+                  CV & Resume Guide
+                </Button>
+              </Link>
+             
+                <Button size="lg" className="bg-workhive-blue text-white hover:bg-workhive-darkBlue">
+                  Request Demo
+                </Button>
+              
+            </div>
         </div>
       </section>
 
@@ -129,18 +129,7 @@ const Index = () => {
             <p className="text-xl mb-8 max-w-3xl mx-auto">
               Join thousands of students who have launched their careers through WorkHive.
             </p>
-            <div className="flex justify-center gap-4 mt-16">
-              <Link to="/resume">
-                <Button size="lg" className="bg-workhive-blue text-white hover:bg-workhive-darkBlue">
-                  CV & Resume Guide
-                </Button>
-              </Link>
-              <Link to="/internships">
-                <Button size="lg" className="bg-workhive-blue text-white hover:bg-workhive-darkBlue">
-                  Browse Internships
-                </Button>
-              </Link>
-            </div>
+           
           </motion.div>
         </div>
       </section>

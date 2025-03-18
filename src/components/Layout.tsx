@@ -1,8 +1,25 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
+  const location = useLocation();
+
+  const isActive = (path: string) => {
+    if (path === '/' && location.pathname !== '/') {
+      return false;
+    }
+    return location.pathname === path;
+  };
+
+  const getLinkClasses = (path: string) => {
+    return `relative text-gray-700 hover:text-blue-600 transition-colors py-2 ${
+      isActive(path) ? 'text-blue-600' : ''
+    } ${
+      isActive(path) ? 'after:content-[""] after:absolute after:bottom-0 after:left-0 after:w-full after:h-0.5 after:bg-blue-600' : ''
+    }`;
+  };
+
   return (
     <div className="min-h-screen flex flex-col">
       {/* Header/Navigation */}
@@ -15,37 +32,37 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
             <nav className="hidden md:flex items-center space-x-6">
               <Link
                 to="/"
-                className="text-gray-700 hover:text-blue-600 transition-colors"
+                className={getLinkClasses('/')}
               >
                 Home
               </Link>
               <Link
                 to="/internships"
-                className="text-gray-700 hover:text-blue-600 transition-colors"
+                className={getLinkClasses('/internships')}
               >
                 Internships
               </Link>
               <Link
                 to="/companies"
-                className="text-gray-700 hover:text-blue-600 transition-colors"
+                className={getLinkClasses('/companies')}
               >
                 Companies
               </Link>
               <Link
                 to="/testimonials"
-                className="text-gray-700 hover:text-blue-600 transition-colors"
+                className={getLinkClasses('/testimonials')}
               >
                 Testimonials
               </Link>
               <Link
-                to="/apply"
-                className="text-gray-700 hover:text-blue-600 transition-colors"
+                to="/application"
+                className={getLinkClasses('/application')}
               >
                 Apply Now
               </Link>
               <Link
                 to="/post-internship"
-                className="text-gray-700 hover:text-blue-600 transition-colors"
+                className={getLinkClasses('/post-internship')}
               >
                 Post Internship
               </Link>

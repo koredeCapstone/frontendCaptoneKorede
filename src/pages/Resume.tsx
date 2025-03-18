@@ -45,39 +45,47 @@ const templates: Template[] = [
     id: "minimalist",
     name: "Minimalist",
     description: "Clean and minimal design with a focus on readability",
-    image: "/images/templates/minimalist.jpg",
+    image: "images/templates/minimalist.jpg",
     type: "resume",
     component: MinimalistTemplate as React.ComponentType<{ data: CVData }>
   },
   {
     id: "creative",
     name: "Creative",
-    description: "Stand out with a unique layout and design elements",
-    image: "/images/templates/creative.jpg",
+    description: "Modern and eye-catching design for creative professionals",
+    image: "images/templates/creative.jpg",
     type: "resume",
     component: CreativeTemplate as React.ComponentType<{ data: CVData }>
   },
   {
     id: "professional",
     name: "Professional",
-    description: "Traditional business style perfect for corporate positions",
-    image: "/images/templates/prof.jpg",
+    description: "Traditional and formal design for corporate settings",
+    image: "images/templates/prof.jpg",
     type: "resume",
     component: ProfessionalTemplate as React.ComponentType<{ data: CVData }>
   },
   {
-    id: "academic",
-    name: "Academic CV",
-    description: "Comprehensive academic CV with detailed sections",
-    image: "/images/templates/cv.jpg",
+    id: "cv-minimalist",
+    name: "Minimalist CV",
+    description: "Clean and minimal design with a focus on readability",
+    image: "images/templates/cv.jpg",
     type: "cv",
     component: MinimalistTemplate as React.ComponentType<{ data: CVData }>
   },
   {
-    id: "research",
-    name: "Research CV",
-    description: "Academic CV focused on research and publications",
-    image: "/images/templates/resume.jpg",
+    id: "cv-creative",
+    name: "Creative CV",
+    description: "Modern and eye-catching design for creative professionals",
+    image: "images/templates/creative.jpg",
+    type: "cv",
+    component: CreativeTemplate as React.ComponentType<{ data: CVData }>
+  },
+  {
+    id: "cv-professional",
+    name: "Professional CV",
+    description: "Traditional and formal design for corporate settings",
+    image: "images/templates/prof.jpg",
     type: "cv",
     component: ProfessionalTemplate as React.ComponentType<{ data: CVData }>
   }
@@ -313,6 +321,16 @@ const Resume = () => {
     return (
       <div className="min-h-screen bg-gray-50 py-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <Button
+            onClick={() => {
+              setShowForm(false);
+              setSelectedTemplate(null);
+            }}
+            className="mb-6"
+            variant="outline"
+          >
+            ← Back to Templates
+          </Button>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {/* Template Preview Side */}
             <div className="bg-white p-6 rounded-lg shadow-lg">

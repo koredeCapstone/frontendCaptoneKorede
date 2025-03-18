@@ -2,6 +2,7 @@ import React from 'react';
 import { Star } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Link } from "react-router-dom";
 
 interface Testimonial {
   id: number;
@@ -123,9 +124,11 @@ const Testimonials = () => {
                 Throughout this internship, Kelsey has developed key skills in project management, teamwork, and design thinking. 
                 We are thrilled to announce that she has accepted a full-time position with us as a Junior Designer starting next month.
               </p>
-              <Button className="bg-blue-500 text-white hover:bg-blue-600 mb-4 w-full max-w-xs">
-                Apply Now
-              </Button>
+              <Link to="/application">
+                <Button className="bg-blue-500 text-white hover:bg-blue-600 mb-4 w-full max-w-xs">
+                  Apply Now
+                </Button>
+              </Link>
               <a href="#" className="text-blue-500 hover:text-blue-600 text-sm">
                 Read More Success Stories
               </a>

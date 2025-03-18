@@ -117,111 +117,122 @@ const SignUp = () => {
         backgroundPosition: "center",
         minHeight: "100vh",
       }}
-      className="flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8"
+      className="relative"
     >
-       <div className=" left-10 text-white">
-        <img src="/images/logo.png" alt="WorkHive Logo" className="w-32 mb-4" />
-        <h1 className="text-3xl font-light-bold text-align:left tracking-tight">Empower Your Career...</h1>
+      {/* Logo and Text */}
+      <div className="absolute left-20 top-1/2 transform -translate-y-1/2 text-white">
+        <div className="flex items-center">
+          <img
+            src="/images/logo.png"
+            alt="WorkHive Logo"
+            className="h-12 w-auto"
+          />
+          <span className="ml-2 text-2xl font-bold text-workhive-white">WORKHIVE</span>
+        </div>
+        <h1 className="text-3xl font-light-bold text-align:left tracking-tight mt-4">Empower Your Career...</h1>
         <p className="text-base text-align:left font-light">Discover a world of opportunities with meaningful internships</p>
       </div>
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="max-w-md w-full space-y-8"
-      >
-        <Card className="border-0 shadow-lg bg-white rounded-2xl">
-          <CardHeader>
-            <CardTitle className="text-2xl font-bold text-center text-gray-900">Create an account</CardTitle>
-            <CardDescription className="text-center text-gray-600">
-              Join WorkHive to start your journey
-            </CardDescription>
-          </CardHeader>
-          <CardContent>
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div>
-                <Input
-                  type="text"
-                  name="fullName"
-                  placeholder="Full Name"
-                  value={formData.fullName}
-                  onChange={handleChange}
-                  required
-                  className={`border ${errors.fullName ? 'border-red-500' : 'border-gray-300'}`}
+
+      <div className="flex min-h-screen items-center justify-center">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="max-w-md w-full space-y-8 mx-4"
+        >
+          <Card className="border-0 shadow-lg bg-white rounded-2xl">
+            <CardHeader>
+              <CardTitle className="text-2xl font-bold text-center text-gray-900">Create an account</CardTitle>
+              <CardDescription className="text-center text-gray-600">
+                Join WorkHive to start your journey
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <div>
+                  <Input
+                    type="text"
+                    name="fullName"
+                    placeholder="Full Name"
+                    value={formData.fullName}
+                    onChange={handleChange}
+                    required
+                    className={`border ${errors.fullName ? 'border-red-500' : 'border-gray-300'}`}
+                    disabled={isLoading}
+                  />
+                  {errors.fullName && (
+                    <p className="mt-1 text-sm text-red-500">{errors.fullName}</p>
+                  )}
+                </div>
+                <div>
+                  <Input
+                    type="email"
+                    name="email"
+                    placeholder="Email address"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                    className={`border ${errors.email ? 'border-red-500' : 'border-gray-300'}`}
+                    disabled={isLoading}
+                  />
+                  {errors.email && (
+                    <p className="mt-1 text-sm text-red-500">{errors.email}</p>
+                  )}
+                </div>
+                <div>
+                  <Input
+                    type="password"
+                    name="password"
+                    placeholder="Password"
+                    value={formData.password}
+                    onChange={handleChange}
+                    required
+                    className={`appearance-none rounded-md relative block w-full px-3 py-2 border ${
+                      errors.password ? "border-red-500" : "border-gray-300"
+                    } placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm`}
+                    disabled={isLoading}
+                  />
+                  {errors.password && <p className="mt-1 text-sm text-red-500">{errors.password}</p>}
+                </div>
+                <div>
+                  <Input
+                    type="password"
+                    name="confirmPassword"
+                    placeholder="Confirm Password"
+                    value={formData.confirmPassword}
+                    onChange={handleChange}
+                    required
+                    className={`appearance-none rounded-md relative block w-full px-3 py-2 border ${
+                      errors.confirmPassword ? "border-red-500" : "border-gray-300"
+                    } placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm`}
+                    disabled={isLoading}
+                  />
+                  {errors.confirmPassword && (
+                    <p className="mt-1 text-sm text-red-500">{errors.confirmPassword}</p>
+                  )}
+                </div>
+                <Button 
+                  type="submit" 
+                  className="w-full bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-lg"
                   disabled={isLoading}
-                />
-                {errors.fullName && (
-                  <p className="mt-1 text-sm text-red-500">{errors.fullName}</p>
-                )}
-              </div>
-              <div>
-                <Input
-                  type="email"
-                  name="email"
-                  placeholder="Email address"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                  className={`border ${errors.email ? 'border-red-500' : 'border-gray-300'}`}
-                  disabled={isLoading}
-                />
-                {errors.email && (
-                  <p className="mt-1 text-sm text-red-500">{errors.email}</p>
-                )}
-              </div>
-              <div>
-                <Input
-                  type="password"
-                  name="password"
-                  placeholder="Password"
-                  value={formData.password}
-                  onChange={handleChange}
-                  required
-                  className={`appearance-none rounded-md relative block w-full px-3 py-2 border ${
-                    errors.password ? "border-red-500" : "border-gray-300"
-                  } placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm`}
-                  disabled={isLoading}
-                />
-                {errors.password && <p className="mt-1 text-sm text-red-500">{errors.password}</p>}
-              </div>
-              <div>
-                <Input
-                  type="password"
-                  name="confirmPassword"
-                  placeholder="Confirm Password"
-                  value={formData.confirmPassword}
-                  onChange={handleChange}
-                  required
-                  className={`appearance-none rounded-md relative block w-full px-3 py-2 border ${
-                    errors.confirmPassword ? "border-red-500" : "border-gray-300"
-                  } placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm`}
-                  disabled={isLoading}
-                />
-                {errors.confirmPassword && (
-                  <p className="mt-1 text-sm text-red-500">{errors.confirmPassword}</p>
-                )}
-              </div>
-              <Button 
-                type="submit" 
-                className="w-full bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-lg"
-                disabled={isLoading}
-              >
-                {isLoading ? "Creating account..." : "Sign up"}
+                >
+                  {isLoading ? "Creating account..." : "Sign up"}
+                </Button>
+              </form>
+              <div className="text-center my-4 text-gray-500">Or</div>
+              <Button className="w-full flex items-center justify-center border border-gray-300 text-gray-700 hover:bg-gray-100 rounded-lg">
+                <FcGoogle className="mr-2" /> Sign up with Google
               </Button>
-            </form>
-            <div className="text-center my-4 text-gray-500">Or</div>
-            <Button className="w-full flex items-center justify-center border border-gray-300 text-gray-700 hover:bg-gray-100 rounded-lg">
-              <FcGoogle className="mr-2" /> Sign up with Google
-            </Button>
-          </CardContent>
-          <CardFooter className="flex justify-center space-x-1">
-            <span className="text-sm text-gray-600">Already have an account?</span>
-            <Link to="/login" className="text-sm text-blue-600 hover:text-blue-500">
-              Sign in
-            </Link>
-          </CardFooter>
-        </Card>
-      </motion.div>
+            </CardContent>
+            <CardFooter className="flex justify-center space-x-1">
+              <span className="text-sm text-gray-600">Already have an account?</span>
+              <Link to="/login" className="text-sm text-blue-600 hover:text-blue-500">
+                Sign in
+              </Link>
+            </CardFooter>
+          </Card>
+        </motion.div>
+      </div>
     </div>
   );
 };
