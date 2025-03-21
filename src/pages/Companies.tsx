@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion, useAnimation, useInView } from 'framer-motion';
 import { Search } from 'lucide-react';
-
+import { Link } from "react-router-dom";
 interface Position {
   id: number;
   name: string;
@@ -177,10 +177,11 @@ const CompanyCard = ({ company }: { company: Company }) => {
               <li key={index} className="mb-1">{position}</li>
             ))}
           </ul>
-          
+          <Link to="/application">
           <button className="btn-primary w-full py-2 text-sm">
             Apply Now
           </button>
+          </Link>
         </div>
       </div>
     </motion.div>
