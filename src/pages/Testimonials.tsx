@@ -205,18 +205,19 @@ const Testimonials = () => {
               </div>
 
               {/* Footer Bottom */}
+              
               <div className="mt-16 text-center">
-                <div className="mb-4">
-                  <select className="bg-opacity-20 bg-white text-white rounded px-3 py-1 border border-gray-500">
-                    <option className="text-black">English</option>
-                  </select>
-                </div>
-                <div className="space-x-4 text-gray-300">
-                  <span>© 2024 Brand, Inc.</span>
-                  <a href="#" className="hover:text-white transition-colors">Privacy</a>
-                  <a href="#" className="hover:text-white transition-colors">Terms</a>
-                  <a href="#" className="hover:text-white transition-colors">Sitemap</a>
-                </div>
+              <div className="mb-4">
+                <select className="bg-opacity-20 bg-white text-white rounded px-3 py-1 border border-gray-500">
+                  <option className="text-black">English</option>
+                </select>
+              </div>
+              <div className="space-x-4 text-gray-300">
+                <span>© 2024 Brand, Inc.</span>
+                <a href="#" className="hover:text-white transition-colors">Privacy</a>
+                <a href="#" className="hover:text-white transition-colors">Terms</a>
+                <a href="#" className="hover:text-white transition-colors">Sitemap</a>
+              </div>
               </div>
             </div>
           </div>
