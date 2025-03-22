@@ -129,7 +129,7 @@ const Testimonials = () => {
                   Apply Now
                 </Button>
               </Link>
-              <a href="#" className="text-blue-500 hover:text-blue-600 text-sm">
+              <a href="#" className="text-blue-500 hover:text-blue-600 text-sm ml-2">
                 Read More Success Stories
               </a>
             </div>
