@@ -26,9 +26,16 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
       <header className="bg-white shadow-sm sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex justify-between items-center">
-            <Link to="/" className="text-2xl font-bold text-workhive-blue">
+          <div className="flex items-center space-x-2">
+          <img
+            src="/images/logo.png"
+            alt="WorkHive Logo"
+            className="h-12 w-auto "
+          />
+            <Link to="/" className="text-2xl font-bold text-workhive-blue ">
               WorkHive
             </Link>
+            </div>
             <nav className="hidden md:flex items-center space-x-6">
               <Link
                 to="/"
@@ -64,7 +71,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
                 to="/post-internship"
                 className={getLinkClasses('/post-internship')}
               >
-                Post Internship
+                Post  an Internship
               </Link>
             </nav>
             <div className="flex items-center space-x-4">

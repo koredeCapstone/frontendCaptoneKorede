@@ -109,10 +109,7 @@ const Index = () => {
                 </Button>
               </Link>
              
-                <Button size="lg" className="bg-workhive-blue text-white hover:bg-workhive-darkBlue">
-                  Request Demo
-                </Button>
-              
+               
             </div>
         </div>
       </section>
