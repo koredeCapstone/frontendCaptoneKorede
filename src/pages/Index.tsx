@@ -10,11 +10,12 @@ const Index = () => {
       {/* Hero Section */}
       <section className="flex-grow flex items-center bg-gradient-to-r from-workhive-blue to-workhive-darkBlue text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center text-center md:text-left">
             <motion.div
               initial={{ opacity: 0, x: -50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
+              className="flex flex-col items-center md:items-start text-center md:text-left"
             >
               <h1 className="text-4xl md:text-5xl font-bold mb-6">
                 Kickstart Your Career with the Perfect Internship
@@ -22,7 +23,7 @@ const Index = () => {
               <p className="text-xl mb-8">
                 Connect with top companies offering internships in your field. Build your skills, network with professionals, and take the first step toward your dream career.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 mt-8">
+              <div className="flex flex-col sm:flex-row gap-4 mt-8 w-full sm:w-auto justify-center md:justify-start">
                 <Link to="/internships">
                   <Button size="lg" className="bg-white text-workhive-blue hover:bg-workhive-lightGray">
                     Browse Internships
@@ -44,12 +45,12 @@ const Index = () => {
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8 }}
-              className="hidden md:block"
+              className="block text-center"
             >
               <img
                 src="images/aa.png"
                 alt="Students working on laptops"
-                className="w-full h-auto rounded-lg shadow-lg"
+                className="w-full h-auto rounded-lg shadow-lg mx-auto"
               />
             </motion.div>
           </div>

@@ -117,8 +117,8 @@ const SignUp = () => {
       }}
       className="relative"
     >
-      <div className="absolute left-20 top-1/2 transform -translate-y-1/2 text-white">
-        <div className="flex items-center">
+      <div className="absolute left-10 ml-10 top-1/2 transform -translate-y-1/2 text-white hidden md:block">
+        <div className="flex items-center ">
           <img src="/images/logo.png" alt="WorkHive Logo" className="h-12 w-auto" />
           <span className="ml-2 text-2xl font-bold text-workhive-white">WORKHIVE</span>
         </div>
@@ -130,12 +130,12 @@ const SignUp = () => {
         </p>
       </div>
 
-      <div className="flex min-h-screen items-center justify-center">
+      <div className="flex min-h-screen items-center justify-end px-10"> 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="max-w-md w-full space-y-8 mx-4"
+          className="max-w-md w-full space-y-8 ml-auto mr-20"
         >
           <Card className="border-0 shadow-lg bg-white rounded-2xl">
             <CardHeader>
@@ -147,7 +147,7 @@ const SignUp = () => {
               </CardDescription>
             </CardHeader>
             <CardContent>
-              <form onSubmit={handleSubmit} className="space-y-4">
+              <form onSubmit={handleSubmit} className="space-y-3">
                 <div>
                   <Input
                     type="text"
@@ -156,11 +156,11 @@ const SignUp = () => {
                     value={formData.fullName}
                     onChange={handleChange}
                     required
-                    className={`border ${errors.fullName ? "border-red-500" : "border-gray-300"}`}
+                    className={`text-sm sm:text-base px-2 sm:px-3 py-1 sm:py-2 border ${errors.fullName ? "border-red-500" : "border-gray-300"}`}
                     disabled={isLoading}
                   />
                   {errors.fullName && (
-                    <p className="mt-1 text-sm text-red-500">{errors.fullName}</p>
+                    <p className="mt-1 text-xs text-red-500">{errors.fullName}</p>
                   )}
                 </div>
                 <div>
@@ -171,11 +171,11 @@ const SignUp = () => {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className={`border ${errors.email ? "border-red-500" : "border-gray-300"}`}
+                    className={`text-sm sm:text-base px-2 sm:px-3 py-1 sm:py-2 border ${errors.email ? "border-red-500" : "border-gray-300"}`}
                     disabled={isLoading}
                   />
                   {errors.email && (
-                    <p className="mt-1 text-sm text-red-500">{errors.email}</p>
+                    <p className="mt-1 text-xs text-red-500">{errors.email}</p>
                   )}
                 </div>
                 <div>
@@ -186,13 +186,13 @@ const SignUp = () => {
                     value={formData.password}
                     onChange={handleChange}
                     required
-                    className={`appearance-none rounded-md relative block w-full px-3 py-2 border ${
+                    className={`text-sm sm:text-base px-2 sm:px-3 py-1 sm:py-2 border ${
                       errors.password ? "border-red-500" : "border-gray-300"
                     } placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm`}
                     disabled={isLoading}
                   />
                   {errors.password && (
-                    <p className="mt-1 text-sm text-red-500">{errors.password}</p>
+                    <p className="mt-1 text-xs text-red-500">{errors.password}</p>
                   )}
                 </div>
                 <div>
@@ -203,31 +203,31 @@ const SignUp = () => {
                     value={formData.confirmPassword}
                     onChange={handleChange}
                     required
-                    className={`appearance-none rounded-md relative block w-full px-3 py-2 border ${
+                    className={`text-sm sm:text-base px-2 sm:px-3 py-1 sm:py-2 border ${
                       errors.confirmPassword ? "border-red-500" : "border-gray-300"
                     } placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm`}
                     disabled={isLoading}
                   />
                   {errors.confirmPassword && (
-                    <p className="mt-1 text-sm text-red-500">{errors.confirmPassword}</p>
+                    <p className="mt-1 text-xs text-red-500">{errors.confirmPassword}</p>
                   )}
                 </div>
                 <Button
                   type="submit"
-                  className="w-full bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-lg"
+                  className="w-full bg-blue-600 hover:bg-blue-500 text-white font-medium text-sm sm:text-base py-1.5 sm:py-2 rounded-md"
                   disabled={isLoading}
                 >
                   {isLoading ? "Creating account..." : "Sign up"}
                 </Button>
               </form>
-              <div className="text-center my-4 text-gray-500">Or</div>
+              <div className="text-center my-2 sm:my-3 text-gray-500 text-xs sm:text-sm">Or</div>
               <Button className="w-full flex items-center justify-center border border-gray-300 text-gray-700 hover:bg-gray-100 rounded-lg">
                 <FcGoogle className="mr-2" /> Sign up with Google
               </Button>
             </CardContent>
-            <CardFooter className="flex justify-center space-x-1">
+            <CardFooter className="flex justify-center space-x-1 text-xs sm:text-sm">
               <span className="text-sm text-gray-600">Already have an account?</span>
-              <Link to="/login" className="text-sm text-blue-600 hover:text-blue-500">
+              <Link to="/login" className="text-blue-600 hover:text-blue-500">
                 Sign in
               </Link>
             </CardFooter>

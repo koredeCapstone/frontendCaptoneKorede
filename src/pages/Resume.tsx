@@ -122,22 +122,21 @@ interface Project {
 // Sample data for preview
 const sampleData: CVData = {
   personalInfo: {
-    fullName: "Alex Johnson",
+    fullName: "Taiwo Rodeeyah Akorede",
     title: "Senior Software Engineer",
-    email: "alex.johnson@example.com",
-    phone: "(555) 123-4567",
-    location: "San Francisco, CA",
+    email: "ko.rodeeyahtaiwo@gmail.com",
+    phone: "0544555516",
+    location: "Kumasi, Ghana",
     linkedin: "linkedin.com/in/alexjohnson",
-    bio: "Passionate software engineer with 5+ years of experience in full-stack development, specializing in React and Node.js. Committed to writing clean, maintainable code and building scalable applications."
   },
   education: [
     {
       id: "1",
-      school: "University of California, Berkeley",
+      school: "Kwame Nkurumah University of SCience and technology, Kumasi",
       degree: "Bachelor of Science",
       field: "Computer Science",
-      startDate: "2015",
-      endDate: "2019",
+      startDate: "2022",
+      endDate: "2026",
       gpa: "3.8"
     }
   ],
@@ -147,7 +146,7 @@ const sampleData: CVData = {
       company: "Tech Solutions Inc.",
       position: "Senior Software Engineer",
       location: "San Francisco, CA",
-      startDate: "2020",
+      startDate: "2023",
       endDate: "Present",
       description: [
         "Led a team of 5 developers in building a microservices-based e-commerce platform",
@@ -178,9 +177,9 @@ const sampleData: CVData = {
     {
       id: "1",
       name: "E-commerce Platform",
-      description: "Built a full-stack e-commerce platform using React, Node.js, and MongoDB",
-      technologies: ["React", "Node.js", "MongoDB", "Redux"],
-      link: "https://github.com/alexj/ecommerce"
+      description: "Designed the frontend of a recipe platform using TypeScript, CSS, and JavaScript",
+      technologies: ["JavaScript", "TypeScript", "MongoDB", "CSS"],
+      link: "https://fades-recipes.vercel.app/"
     }
   ]
 };

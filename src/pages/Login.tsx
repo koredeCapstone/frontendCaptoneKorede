@@ -106,29 +106,29 @@ const Login = () => {
       className="relative"
     >
       {/* Logo and Text */}
-      <div className="absolute left-20 top-1/2 transform -translate-y-1/2 text-white">
-        <div className="flex items-center">
+      <div className="hidden md:block md:absolute md:left-10 md:ml-10 md:top-1/2 md:-translate-y-1/2 text-white text-center md:text-left mb-8 md:mb-0">
+        <div className="flex justify-center md:justify-start items-center">
           <img src="/images/logo.png" alt="WorkHive Logo" className="h-12 w-auto" />
           <span className="ml-2 text-2xl font-bold text-workhive-white">WORKHIVE</span>
         </div>
-        <h1 className="text-3xl font-light-bold text-align:left tracking-tight mt-4">
+        <h1 className="text-xl sm:text-2xl md:text-3xl font-bold tracking-tight mt-4">
           Empower Your Career...
         </h1>
-        <p className="text-base text-align:left font-light">
+        <p className="text-sm sm:text-base font-light">
           Discover a world of opportunities with meaningful internships
         </p>
       </div>
 
-      <div className="flex min-h-screen items-center justify-center">
+      <div className="flex min-h-screen items-center justify-end px-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="max-w-md w-full space-y-8 mx-4"
+          className="max-w-md w-full space-y-5 ml-auto mr-20"
         >
           <Card className="border-0 shadow-lg">
             <CardHeader>
-              <CardTitle className="text-2xl font-bold text-center">Welcome back</CardTitle>
+              <CardTitle className="text-xl md:text-2xl font-bold text-center">Welcome back</CardTitle>
               <CardDescription className="text-center">
                 Sign in to your account to continue
               </CardDescription>
@@ -143,9 +143,9 @@ const Login = () => {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className={`appearance-none rounded-md relative block w-full px-3 py-2 border ${
+                    className={`w-full px-3 py-2 border ${
                       errors.email ? "border-red-500" : "border-gray-300"
-                    } placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm`}
+                    }placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm`}
                     disabled={isLoading}
                   />
                   {errors.email && (
@@ -171,7 +171,7 @@ const Login = () => {
                 </div>
                 <Button
                   type="submit"
-                  className="w-full bg-workhive-blue hover:bg-workhive-blue/90"
+                  className="w-full bg-workhive-blue hover:bg-workhive-blue/90 py-2 rounded-md"
                   disabled={isLoading}
                 >
                   {isLoading ? "Signing in..." : "Sign in"}
@@ -184,7 +184,7 @@ const Login = () => {
                 </Button>
               </div>
             </CardContent>
-            <CardFooter className="flex flex-col space-y-4">
+            <CardFooter className="flex flex-col space-y-4 text-center">
               <div className="flex justify-center space-x-1">
                 <span className="text-sm text-gray-600">Don't have an account?</span>
                 <Link to="/signup" className="text-sm text-blue-600 hover:text-blue-500">
