@@ -12,12 +12,6 @@ interface FormErrors {
   password?: string;
 }
 
-interface User {
-  fullName: string;
-  email: string;
-  password: string;
-}
-
 const Login = () => {
   const [formData, setFormData] = useState({
     email: "",
@@ -32,6 +26,8 @@ const Login = () => {
 
     if (!formData.email.trim()) {
       newErrors.email = "Email is required";
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      newErrors.email = "Email is invalid";
     }
 
     if (!formData.password) {
@@ -44,7 +40,7 @@ const Login = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!validateForm()) {
       return;
     }
@@ -52,28 +48,36 @@ const Login = () => {
     setIsLoading(true);
 
     try {
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      const existingUsers = localStorage.getItem('users') ? 
-        JSON.parse(localStorage.getItem('users') || '[]') : [];
-      
-      const user = existingUsers.find((u: User) => 
-        u.email === formData.email && u.password === formData.password
-      );
+      const response = await fetch("http://localhost:3000/api/auth/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: formData.email,
+          password: formData.password,
+        }),
+        credentials: "include", // Required to send/receive cookies (HTTP-only cookie set by backend)
+      });
 
-      if (!user) {
-        toast.error("Invalid email or password");
-        return;
+      const data = await response.json();
+
+      if (response.ok && data.success) {
+        // Since the token is set in an HTTP-only cookie, we don't need to store it manually
+        // Optionally store user info in localStorage for UI purposes
+        localStorage.setItem(
+          "user",
+          JSON.stringify({
+            email: formData.email,
+            isLoggedIn: true,
+          })
+        );
+
+        toast.success(data.message || "Successfully signed in!");
+        navigate("/dashboard");
+      } else {
+        toast.error(data.message || "Login failed. Please try again.");
       }
-
-      localStorage.setItem('user', JSON.stringify({
-        fullName: user.fullName,
-        email: user.email,
-        isLoggedIn: true
-      }));
-
-      toast.success("Successfully signed in!");
-      navigate('/dashboard');
     } catch (error) {
       toast.error("Something went wrong. Please try again.");
       console.error("Login error:", error);
@@ -84,9 +88,9 @@ const Login = () => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
     if (errors[name as keyof FormErrors]) {
-      setErrors(prev => ({ ...prev, [name]: undefined }));
+      setErrors((prev) => ({ ...prev, [name]: undefined }));
     }
   };
 
@@ -104,17 +108,17 @@ const Login = () => {
       {/* Logo and Text */}
       <div className="absolute left-20 top-1/2 transform -translate-y-1/2 text-white">
         <div className="flex items-center">
-          <img
-            src="/images/logo.png"
-            alt="WorkHive Logo"
-            className="h-12 w-auto"
-          />
+          <img src="/images/logo.png" alt="WorkHive Logo" className="h-12 w-auto" />
           <span className="ml-2 text-2xl font-bold text-workhive-white">WORKHIVE</span>
         </div>
-        <h1 className="text-3xl font-light-bold text-align:left tracking-tight mt-4">Empower Your Career...</h1>
-        <p className="text-base text-align:left font-light">Discover a world of opportunities with meaningful internships</p>
+        <h1 className="text-3xl font-light-bold text-align:left tracking-tight mt-4">
+          Empower Your Career...
+        </h1>
+        <p className="text-base text-align:left font-light">
+          Discover a world of opportunities with meaningful internships
+        </p>
       </div>
-      
+
       <div className="flex min-h-screen items-center justify-center">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -140,7 +144,7 @@ const Login = () => {
                     onChange={handleChange}
                     required
                     className={`appearance-none rounded-md relative block w-full px-3 py-2 border ${
-                      errors.email ? 'border-red-500' : 'border-gray-300'
+                      errors.email ? "border-red-500" : "border-gray-300"
                     } placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm`}
                     disabled={isLoading}
                   />
@@ -157,7 +161,7 @@ const Login = () => {
                     onChange={handleChange}
                     required
                     className={`appearance-none rounded-md relative block w-full px-3 py-2 border ${
-                      errors.password ? 'border-red-500' : 'border-gray-300'
+                      errors.password ? "border-red-500" : "border-gray-300"
                     } placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm`}
                     disabled={isLoading}
                   />
@@ -165,8 +169,8 @@ const Login = () => {
                     <p className="mt-1 text-sm text-red-500">{errors.password}</p>
                   )}
                 </div>
-                <Button 
-                  type="submit" 
+                <Button
+                  type="submit"
                   className="w-full bg-workhive-blue hover:bg-workhive-blue/90"
                   disabled={isLoading}
                 >
@@ -180,17 +184,17 @@ const Login = () => {
                 </Button>
               </div>
             </CardContent>
-             <CardFooter className="flex flex-col space-y-4">
+            <CardFooter className="flex flex-col space-y-4">
               <div className="flex justify-center space-x-1">
                 <span className="text-sm text-gray-600">Don't have an account?</span>
                 <Link to="/signup" className="text-sm text-blue-600 hover:text-blue-500">
                   Sign up
                 </Link>
               </div>
-              <Button 
-                variant="link" 
+              <Button
+                variant="link"
                 className="text-sm text-gray-600 hover:text-gray-900"
-                onClick={() => navigate('/forgot-password')}
+                onClick={() => navigate("/forgot-password")}
               >
                 Forgot your password?
               </Button>
@@ -203,5 +207,3 @@ const Login = () => {
 };
 
 export default Login;
-
-     

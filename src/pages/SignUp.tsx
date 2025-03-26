@@ -14,12 +14,6 @@ interface FormErrors {
   confirmPassword?: string;
 }
 
-interface User {
-  fullName: string;
-  email: string;
-  password: string;
-}
-
 const SignUp = () => {
   const [formData, setFormData] = useState({
     fullName: "",
@@ -40,6 +34,8 @@ const SignUp = () => {
 
     if (!formData.email.trim()) {
       newErrors.email = "Email is required";
+    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
+      newErrors.email = "Email is invalid";
     }
 
     if (!formData.password) {
@@ -58,7 +54,7 @@ const SignUp = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!validateForm()) {
       return;
     }
@@ -66,33 +62,35 @@ const SignUp = () => {
     setIsLoading(true);
 
     try {
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      
-      const existingUsers = localStorage.getItem('users') ? 
-        JSON.parse(localStorage.getItem('users') || '[]') : [];
-      
-      if (existingUsers.some((u: User) => u.email === formData.email)) {
-        toast.error("An account with this email already exists");
-        setIsLoading(false);
-        return;
+      const response = await fetch("http://localhost:3000/api/auth/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          fullName: formData.fullName,
+          email: formData.email,
+          password: formData.password,
+          confirmPassword: formData.confirmPassword,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok && data.success) {
+        toast.success(data.message || "Account created successfully!");
+        localStorage.setItem(
+          "user",
+          JSON.stringify({
+            fullName: formData.fullName,
+            email: formData.email,
+            isLoggedIn: true,
+          })
+        );
+        navigate("/dashboard");
+      } else {
+        toast.error(data.message || "Signup failed. Please try again.");
       }
-
-      const newUser: User = {
-        fullName: formData.fullName,
-        email: formData.email,
-        password: formData.password,
-      };
-      
-      localStorage.setItem('users', JSON.stringify([...existingUsers, newUser]));
-
-      localStorage.setItem('user', JSON.stringify({
-        fullName: formData.fullName,
-        email: formData.email,
-        isLoggedIn: true
-      }));
-
-      toast.success("Account created successfully!");
-      navigate('/dashboard');
     } catch (error) {
       toast.error("Something went wrong. Please try again.");
       console.error("Signup error:", error);
@@ -103,9 +101,9 @@ const SignUp = () => {
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
+    setFormData((prev) => ({ ...prev, [name]: value }));
     if (errors[name as keyof FormErrors]) {
-      setErrors(prev => ({ ...prev, [name]: undefined }));
+      setErrors((prev) => ({ ...prev, [name]: undefined }));
     }
   };
 
@@ -119,18 +117,17 @@ const SignUp = () => {
       }}
       className="relative"
     >
-      {/* Logo and Text */}
       <div className="absolute left-20 top-1/2 transform -translate-y-1/2 text-white">
         <div className="flex items-center">
-          <img
-            src="/images/logo.png"
-            alt="WorkHive Logo"
-            className="h-12 w-auto"
-          />
+          <img src="/images/logo.png" alt="WorkHive Logo" className="h-12 w-auto" />
           <span className="ml-2 text-2xl font-bold text-workhive-white">WORKHIVE</span>
         </div>
-        <h1 className="text-3xl font-light-bold text-align:left tracking-tight mt-4">Empower Your Career...</h1>
-        <p className="text-base text-align:left font-light">Discover a world of opportunities with meaningful internships</p>
+        <h1 className="text-3xl font-light-bold tracking-tight mt-4">
+          Empower Your Career...
+        </h1>
+        <p className="text-base font-light">
+          Discover a world of opportunities with meaningful internships
+        </p>
       </div>
 
       <div className="flex min-h-screen items-center justify-center">
@@ -142,7 +139,9 @@ const SignUp = () => {
         >
           <Card className="border-0 shadow-lg bg-white rounded-2xl">
             <CardHeader>
-              <CardTitle className="text-2xl font-bold text-center text-gray-900">Create an account</CardTitle>
+              <CardTitle className="text-2xl font-bold text-center text-gray-900">
+                Create an account
+              </CardTitle>
               <CardDescription className="text-center text-gray-600">
                 Join WorkHive to start your journey
               </CardDescription>
@@ -157,7 +156,7 @@ const SignUp = () => {
                     value={formData.fullName}
                     onChange={handleChange}
                     required
-                    className={`border ${errors.fullName ? 'border-red-500' : 'border-gray-300'}`}
+                    className={`border ${errors.fullName ? "border-red-500" : "border-gray-300"}`}
                     disabled={isLoading}
                   />
                   {errors.fullName && (
@@ -172,7 +171,7 @@ const SignUp = () => {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                    className={`border ${errors.email ? 'border-red-500' : 'border-gray-300'}`}
+                    className={`border ${errors.email ? "border-red-500" : "border-gray-300"}`}
                     disabled={isLoading}
                   />
                   {errors.email && (
@@ -192,7 +191,9 @@ const SignUp = () => {
                     } placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm`}
                     disabled={isLoading}
                   />
-                  {errors.password && <p className="mt-1 text-sm text-red-500">{errors.password}</p>}
+                  {errors.password && (
+                    <p className="mt-1 text-sm text-red-500">{errors.password}</p>
+                  )}
                 </div>
                 <div>
                   <Input
@@ -211,8 +212,8 @@ const SignUp = () => {
                     <p className="mt-1 text-sm text-red-500">{errors.confirmPassword}</p>
                   )}
                 </div>
-                <Button 
-                  type="submit" 
+                <Button
+                  type="submit"
                   className="w-full bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-lg"
                   disabled={isLoading}
                 >
